@@ -1,19 +1,7 @@
-### Showcase
-
-https://github.com/justchokingaround/lobster/assets/44473782/d597335c-42a9-4e45-8948-122744aa5ca9
-
-## Join the discord server!
-
-### https://discord.gg/JTDS2CKjQU
 
 ## Overview
 
-- [Install](#install)
-  - [Arch linux](#arch)
-  - [Debian linux](#debian-using-makedeb-and-mist)
-  - [Linux](#linux-from-source)
-  - [NixOS](#nixos-flake)
-  - [Mac](#mac)
+
   - [Windows](#windows)
 - [Usage](#usage)
   - [`-c` / `--continue`](#-c----continue-argument)
@@ -39,95 +27,6 @@ https://github.com/justchokingaround/lobster/assets/44473782/d597335c-42a9-4e45-
 
 ## Install
 
-#### Arch
-
-Note: it is recommended to use the `lobster-git` package, as it is more up to date, and as the project is currently being actively maintained
-
-```sh
-paru -S lobster-git
-```
-
-or
-
-```sh
-paru -S lobster
-```
-
-#### Debian (using makedeb and mist)
-
-Here are the full installation instructions for Debian:
-
-Install the dependencies:
-
-```sh
-sudo apt update && sudo apt upgrade && sudo apt install git wget
-```
-
-During this step write `makedeb` and enter, when prompted:
-
-```sh
-bash -ci "$(wget -qO - 'https://shlink.makedeb.org/install')"
-```
-
-```sh
-wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
-```
-
-```
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
-```
-
-```
-sudo apt update && sudo apt install mist
-```
-
-During this step when prompted to `Review files for 'lobster-git'? [Y/n]`, write `n` and enter.
-
-```sh
-mist update && mist install lobster-git
-```
-
-#### Linux (from source)
-
-```sh
-sudo curl -sL github.com/justchokingaround/lobster/raw/main/lobster.sh -o /usr/local/bin/lobster &&
-sudo chmod +x /usr/local/bin/lobster
-```
-
-#### Nixos (Flake)
-
-Add this to you flake.nix
-
-``` nix
-inputs.lobster.url = "github:justchokingaround/lobster";
-```
-
-Add this to you configuration.nix
-
-``` nix
-environment.systemPackages = [
-  inputs.lobster.packages.<architecture>.lobster
-];
-```
-
-##### Or for run the script once use
-```sh
-nix run github:justchokingaround/lobster#lobster
-```
-
-##### Nixos (Flake) update
-When encoutering errors first run the nix flake update command in the cloned project and second add new/missing [dependencies](#dependencies) to the default.nix file. Use the [nixos package search](https://search.nixos.org/packages) to find the correct name.
-
-``` nix
-nix flake update
-```
-
-#### Mac
-
-```sh
-curl -sL github.com/justchokingaround/lobster/raw/main/lobster.sh -o "$(brew --prefix)"/bin/lobster &&
-chmod +x "$(brew --prefix)"/bin/lobster
-```
 
 #### Windows
 
@@ -333,23 +232,7 @@ For `fzf` you will need to install [ueberzugpp](https://github.com/jstkdng/ueber
 <details>
 <summary>Installation instructions for ueberzugpp</summary>
 
-On Arch Linux you can install it using your aur helper of choice with:
 
-```sh
-paru -S ueberzugpp
-```
-
-On Mac you can install it using homebrew with:
-
-```sh
-curl -s -O "https://raw.githubusercontent.com/jstkdng/ueberzugpp/master/homebrew/ueberzugpp.rb"
-brew install ./ueberzugpp
-rm ueberzugpp
-```
-
-In other cases, you can build it from [source](https://github.com/jstkdng/ueberzugpp/#build-from-source).
-
-</details>
 
 ### `-j` / `--json` argument
 
@@ -517,24 +400,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ```
 
 ## Uninstall
-
-### Arch Linux
-
-```sh
-paru -R lobster
-```
-
-### Linux
-
-```sh
-sudo rm $(which lobster)
-```
-
-### Mac
-
-```sh
-rm "$(brew --prefix)"/bin/lobster
-```
 
 ### Windows
 
